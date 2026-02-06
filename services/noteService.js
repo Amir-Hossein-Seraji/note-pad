@@ -9,8 +9,10 @@ const noteService = {
   async getNotes() {
     const response = await databaseService.listDocuments(dbId, colId);
     
-    // FIX: Just return the response directly! 
-    // It already looks like { data: [...], error: ... }
+    // DEBUG: Uncomment this to see exactly what is coming back
+
+    if (response.error) return { error: response.error };
+    
     return response; 
   },
 
@@ -20,7 +22,7 @@ const noteService = {
 
      const data = {
        text: text,
-       createdAt: new Date().toISOString(),
+       Created_AT: new Date().toISOString(),
       //  user_id: userId // If you have a user_id attribute
      };
      const response = await databaseService.createDocument(
@@ -29,7 +31,26 @@ const noteService = {
       return {error: response.error}
     }
      return {data: response};
-  }
+  },
+  //Update note
+  async updateNote (id ,text){
+    const response = await databaseService.updateDocument(dbId , colId,id,
+      {
+        text
+      });
+    if (response?.error){
+      return {error: response.error};
+    }
+    return {data: response};
+  },
+  //Delete note
+  async deleteNote (id){
+    const response = await databaseService.deleteDocument(dbId , colId , id);
+    if (response?.error){
+      return {error: response.error};
+    }
+    return {success: true};
+  },
 };
 
 export default noteService;
