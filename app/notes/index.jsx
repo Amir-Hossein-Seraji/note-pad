@@ -3,12 +3,12 @@ import NoteList from '@/components/NoteList';
 import noteService from '@/services/noteService';
 import { useEffect, useState } from 'react';
 import {
-    ActivityIndicator,
-    Alert,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 const NoteScreen = () => {
@@ -29,7 +29,6 @@ const NoteScreen = () => {
   const fetchNotes = async () => {
     setLoading(true);
     const response = await noteService.getNotes();
-
     if (response.error) {
       setError(response.error);
       Alert.alert('Error', response.error);
@@ -45,7 +44,7 @@ const NoteScreen = () => {
   const addNote = async () => {
     if (newNote.trim() === '') return;
 
-    const response = await noteService.addNote(user.$id, newNote);
+    const response = await noteService.addNote( newNote);
 
     if (response.error) {
       Alert.alert('Error', response.error);
