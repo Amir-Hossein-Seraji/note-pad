@@ -3,7 +3,7 @@ import authService from '../services/authService';
 
 const authContext = createContext();
 
-export const AuthProvider = ({ Children}) => {
+export const AuthProvider = ({ children}) => {
     const [user ,setUser] = useState(null);
     const [loading , setLoading] =useState(true);
     
@@ -49,7 +49,7 @@ export const AuthProvider = ({ Children}) => {
             logout,
             loading
         }}>
-            {Children}
+            {children}
         </authContext.Provider>
     )
 }
