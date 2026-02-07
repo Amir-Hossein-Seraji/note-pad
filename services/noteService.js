@@ -9,11 +9,15 @@ const noteService = {
   async getNotes() {
     const response = await databaseService.listDocuments(dbId, colId);
     
-    // DEBUG: Uncomment this to see exactly what is coming back
-
+    // Safety 1: Handle Errors
     if (response.error) return { error: response.error };
-    
-    return response; 
+
+    // Safety 2: If it's already wrapped (Scenario A), pass it.
+    if (response.data) return response; 
+
+    // Safety 3: If it's raw (Scenario B), wrap it ourselves.
+    // This guarantees the screen NEVER crashes with "undefined".
+    return { data: response.documents || [] }; 
   },
 
   // Add Note (You will need this back soon)

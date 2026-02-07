@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
-
+import { AuthProvider } from '../contexts/authContext';
 // const HeaderLogout = () => {
 //   const { user, logout } = useAuth();
 
@@ -13,6 +13,7 @@ import { StyleSheet } from 'react-native';
 
 const RootLayout = () => {
   return (
+    <AuthProvider>
       <Stack
         screenOptions={{
           headerStyle: {
@@ -35,6 +36,7 @@ const RootLayout = () => {
         <Stack.Screen name='notes' options={{ headerTitle: 'Notes' }} />
         <Stack.Screen name='auth' options={{ headerTitle: 'Login' }} />
       </Stack>
+    </AuthProvider>
   );
 };
 
